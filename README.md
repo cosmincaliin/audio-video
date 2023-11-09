@@ -6,7 +6,7 @@ Este proyecto es un reproductor de audio HTML personalizado con controles visual
 
 - [Reproductor de Audio con Controles Personalizados](#reproductor-de-audio-con-controles-personalizados)
   - [Contenido](#contenido)
-  - [Demo](#demo)
+  - [Demo](https://cosmincaliin.github.io/audio-video/)
   - [Características](#características)
   - [Requisitos](#requisitos)
   - [Instrucciones de Uso](#instrucciones-de-uso)
@@ -15,7 +15,7 @@ Este proyecto es un reproductor de audio HTML personalizado con controles visual
 
 ## Demo
 
-Puedes ver una demostración del reproductor de audio personalizado en vivo [aquí](#).
+Puedes ver una demostración del reproductor de audio personalizado en vivo [aquí](https://cosmincaliin.github.io/audio-video/).
 
 ## Características
 
