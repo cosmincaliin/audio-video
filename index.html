@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Àudio i Vídeo</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -19,16 +19,28 @@
         <div class="ocean">
             <div class="wave"></div>
             <div class="wave"></div>
-          </div>
+        </div>
     </div>
-    <!-- Afegim un botó de control per engegar la música. Utilitzem una font d'icones. -->
+    <!-- Control de reproducción y reinicio con cambio dinámico de icono -->
     <div class="controlButtons">
-        <!-- Engeguem l'àudio en fer click. -->
-        <button type="button" onclick="engegarAudio();">
-            <span class="material-symbols-outlined">
+        <button type="button" onclick="togglePlayPause();">
+            <span id="playPauseIcon" class="material-symbols-outlined">
                 play_arrow
             </span>
         </button>
+        <button type="button" onclick="resetAudio();">
+            <span class="material-symbols-outlined">
+                replay
+            </span>
+        </button>
+    </div>
+    <!-- Control deslizante de volumen -->
+    <div class="volumeSlider">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" oninput="adjustVolume(this.value);">
+    </div>
+    <!-- Control deslizante de progreso -->
+    <div class="progressSlider">
+        <input type="range" id="progressSlider" min="0" step="1" value="0" oninput="seekAudio(this.value);">
     </div>
     <!-- Recordeu que heu de seguir les lleis en matèria de propietat intelectual.
          En aquest cas, cal nomenar i enllaçar l'autor i el tipus de llicència. 
@@ -45,17 +57,43 @@
     <!-- Cal seleccionar l'element d'àudio. -->
     <script>
         let audio = document.getElementById('player');
+        let playPauseButton = document.getElementById('playPauseIcon');
+        let isPlaying = false;
+        let waves = document.querySelectorAll('.wave');
 
-        function engegarAudio() {
-            // engeguem audio
-            audio.play();
-            // engeguem animació
-            var waves = document.querySelectorAll('.wave');
-            for (var i = 0; i < waves.length; i++) {
-                waves[i].classList.add('playing');
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.textContent = 'play_arrow';
+                for (var i = 0; i < waves.length; i++) {
+                    waves[i].classList.remove('playing');
+                }
+            } else {
+                audio.play();
+                playPauseButton.textContent = 'pause';
+                for (var i = 0; i < waves.length; i++) {
+                    waves[i].classList.add('playing');
+                }
             }
+            isPlaying = !isPlaying;
         }
 
+        function resetAudio() {
+            audio.currentTime = 0;
+        }
+
+        function adjustVolume(volume) {
+            audio.volume = parseFloat(volume);
+        }
+
+        function seekAudio(position) {
+            audio.currentTime = position;
+        }
+
+        audio.addEventListener('timeupdate', function() {
+            let currentTime = audio.currentTime;
+            document.getElementById('progressSlider').value = currentTime;
+        });
     </script>
 </body>
 </html>
