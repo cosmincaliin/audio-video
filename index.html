@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Àudio i Vídeo</title>
+    <style>
+        /* Modificación en el estilo de los subtítulos */
+        track {
+            font-style: italic;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <audio controls>
@@ -17,21 +24,50 @@
         is licensed under <a rel="nofollow" class="external text" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
     </div>
     <hr>
-    <!-- L'etiqueta <video> també accepta varies propietats: height, width, autoplay... 
-         poster permet establir un fons per quan no el vídeo no s'està reproduint.
-    -->
+    <!-- Añadir un botón a la página principal -->
+    <button id="captureButton">Capturar Fotograma</button>
+    <!-- Agregar un canvas para mostrar el fotograma en blanco y negro -->
+    <canvas id="videoCanvas" style="border: 1px solid #000;"></canvas>
+    
+    <script>
+        document.getElementById('captureButton').addEventListener('click', function() {
+            // Obtener el elemento de video
+            var video = document.querySelector('video');
+            
+            // Obtener el contexto del canvas
+            var canvas = document.getElementById('videoCanvas');
+            var context = canvas.getContext('2d');
+            
+            // Configurar el canvas con las dimensiones del video
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            // Capturar el fotograma actual y convertirlo a blanco y negro
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+            var data = imageData.data;
+            
+            for (var i = 0; i < data.length; i += 4) {
+                var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                data[i] = avg;      // rojo
+                data[i + 1] = avg;  // verde
+                data[i + 2] = avg;  // azul
+            }
+            
+            // Aplicar la imagen en blanco y negro al canvas
+            context.putImageData(imageData, 0, 0);
+        });
+    </script>
+
     <video controls>
-        <!-- podem tenir diversos formats. El repoductor escollirà el primer que reconegui. -->
+        <!-- Se pueden mantener las fuentes de video originales -->
         <source src="media/metro.mp4" type="video/mp4">
         <source src="media/metro.ogg" type="video/ogg">
-        <!-- afegim els subtítols en format WebVTT (Web Video Text Tracks), un per cada idioma
-             El reproductor ens deixa escollir idioma en el seu menú per defecte.
-        -->
-        <!-- captions: normalment per persones amb discapacitat auditiva, amb descripcions diverses
-             subtitles: per traducció dels diàlegs.
-        -->
+        
+        <!-- Mantener los subtítulos originales -->
         <track src="media/captions/metro-cat.vtt" label="Català" kind="captions" srclang="es-cat" default>
         <track src="media/captions/metro-es.vtt" label="Espanyol" kind="captions" srclang="es">
+        
         El teu navegador no suporta l'element HTML vídeo.
     </video>
 </body>
