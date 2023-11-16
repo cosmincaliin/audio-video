@@ -10,7 +10,7 @@ Este repositorio principal combina las funcionalidades de dos ramas distintas: u
 
 Este componente demuestra el uso de elementos de audio y video en HTML5. Incluye un archivo HTML (`index.html`) que presenta un reproductor de audio, un reproductor de video, y un botón para capturar un fotograma del video en blanco y negro. La demo utiliza archivos multimedia ubicados en la carpeta `media/` y proporciona información sobre la licencia del archivo de audio utilizado.
 
-Instrucciones detalladas y explicaciones se encuentran en [la rama de video](#rama-de-video).
+Instrucciones detalladas y explicaciones se encuentran en [la rama de video](https://github.com/cosmincaliin/audio-video/tree/video).
 
 ### Rama de Audio
 
@@ -18,7 +18,7 @@ Instrucciones detalladas y explicaciones se encuentran en [la rama de video](#ra
 
 Este proyecto es un reproductor de audio HTML personalizado con controles visuales atractivos y un control deslizante de volumen. Permite reproducir archivos de audio, ajustar el volumen de reproducción, y muestra el nombre del archivo de audio debajo del reproductor. La demo está disponible en [este enlace](https://cosmincaliin.github.io/audio-video/).
 
-Para más detalles sobre cómo utilizar y personalizar este reproductor, consulta [la rama de audio](#rama-de-audio).
+Para más detalles sobre cómo utilizar y personalizar este reproductor, consulta [la rama de audio](https://github.com/cosmincaliin/audio-video/tree/audio).
 
 ## Rama de Video
 
